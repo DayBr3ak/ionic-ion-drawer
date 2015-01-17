@@ -27,7 +27,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
   var isTargetDrag = false;
 
   var width = $element[0].clientWidth;
-  mainContent.addClass('drawer-content');
+  //mainContent.addClass('drawer-content');
     
   // Current State of Drawer
   var drawerState = 'close';
