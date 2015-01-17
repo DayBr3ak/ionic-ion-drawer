@@ -12,7 +12,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
 .controller('drawerCtrl', ['$element', '$attrs', '$ionicGesture', '$document', function($element, $attr, $ionicGesture, $document) {
   var el = $element[0];
   var mainContent = angular.element(document.querySelectorAll("ion-pane")[0]);
-  console.log(angular.element(document.querySelectorAll("ion-pane"));
+  console.log(angular.element(document.querySelectorAll("ion-pane")));
   var dragging = false;
   var startX, lastX, offsetX, newX;
   var side;
