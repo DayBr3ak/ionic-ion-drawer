@@ -167,6 +167,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
   };
 
   var onContentTap = function(e) {
+    console.log('content taped');
     if (this.isOpen()){
         this.close();
     }
