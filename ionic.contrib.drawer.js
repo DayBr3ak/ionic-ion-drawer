@@ -47,7 +47,6 @@ angular.module('ionic.contrib.drawer', ['ionic'])
       }
       el = el.parentNode;
     }
-    return false;
   };
 
   var startDrag = function(e) {
