@@ -11,6 +11,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
 
 .controller('drawerCtrl', ['$element', '$attrs', '$ionicGesture', '$document', function($element, $attr, $ionicGesture, $document) {
   var el = $element[0];
+  var mainContent = angular.element(document.querySelectorAll("ion-pane")[0]);
   var dragging = false;
   var startX, lastX, offsetX, newX;
   var side;
@@ -26,7 +27,8 @@ angular.module('ionic.contrib.drawer', ['ionic'])
   var isTargetDrag = false;
 
   var width = $element[0].clientWidth;
-
+  mainContent.addClass('drawer-content');
+    
   // Current State of Drawer
   var drawerState = 'close';
 
@@ -45,6 +47,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
       }
       el = el.parentNode;
     }
+    return false;
   };
 
   var startDrag = function(e) {
@@ -130,14 +133,6 @@ angular.module('ionic.contrib.drawer', ['ionic'])
   side = $attr.side == 'left' ? LEFT : RIGHT;
   console.log(side);
 
-  $ionicGesture.on('drag', function(e) {
-    doDrag(e);
-  }, $document);
-  $ionicGesture.on('dragend', function(e) {
-    doEndDrag(e);
-  }, $document);
-
-
   this.close = function() {
     enableAnimation();
     ionic.requestAnimationFrame(function() {
@@ -171,6 +166,21 @@ angular.module('ionic.contrib.drawer', ['ionic'])
   this.setState = function(value) {
     drawerState = value;
   };
+
+  var onContentTap = function(e) {
+    if (this.isOpen()){
+        this.close();
+    }
+    e.gesture.srcEvent.preventDefault();
+  };
+
+  // Event handling
+    
+  var dragListener = $ionicGesture.on('drag', doDrag, $document);
+  var dragendListener = $ionicGesture.on('dragend', doEndDrag, $document);
+  var contentTapListener = $ionicGesture.on('tap', onContentTap, mainContent);
+  
+
 }])
 
 .directive('drawer', ['$rootScope', '$ionicGesture', function($rootScope, $ionicGesture) {
@@ -199,7 +209,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
         }
       };
     }
-  }
+  };
 }])
 
 .directive('drawerClose', ['$rootScope', function($rootScope) {
@@ -211,7 +221,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
         drawerCtrl.close();
       });
     }
-  }
+  };
 }]);
 
 })();
