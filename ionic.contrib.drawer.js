@@ -178,7 +178,7 @@ angular.module('ionic.contrib.drawer', ['ionic'])
     
   var dragListener = $ionicGesture.on('drag', doDrag, $document);
   var dragendListener = $ionicGesture.on('dragend', doEndDrag, $document);
-  var contentTapListener = $ionicGesture.on('tap', onContentTap, mainContent);
+  //var contentTapListener = $ionicGesture.on('tap', onContentTap, mainContent);
   
 
 }])
